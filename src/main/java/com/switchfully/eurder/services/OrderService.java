@@ -42,7 +42,7 @@ public class OrderService {
         this.validationService = validationService;
     }
 
-    public OrderDTO createNewOrder(String customerId, CreateOrderDTO dto) {
+    public OrderDTO createNewOrder(int customerId, CreateOrderDTO dto) {
         if (validationService.isValidCreateOrderDTO(dto) && customerRepository.existsByUserId(customerId)) {
             Order newOrder = orderMapper.toOrder(customerId, dto);
             orderRepository.save(newOrder);
@@ -52,7 +52,7 @@ public class OrderService {
             throw new IllegalArgumentException("The parameters for your order are invalid");
     }
 
-    public OrderDTO reorderExistingOrder(String customerId, String orderId) {
+    public OrderDTO reorderExistingOrder(int customerId, String orderId) {
         Order existingOrder = orderRepository.findByOrderId(orderId);
         Order newOrder = new Order();
 
@@ -66,7 +66,7 @@ public class OrderService {
         } else throw new AuthorisationException("You are not allowed to reorder this specific order.");
     }
 
-    public OrderReportDTO getReportOfCustomerOrders(String customerId) {
+    public OrderReportDTO getReportOfCustomerOrders(int customerId) {
         List<OrderDTO> reportedOrders;
 
         if (customerRepository.existsByUserId(customerId)) {
@@ -84,7 +84,7 @@ public class OrderService {
             throw new NoSuchElementException("This customer is not found in our database.");
     }
 
-    public ShippingReportDTO getReportOfOutgoingShippingForToday(String authorisationId) {
+    public ShippingReportDTO getReportOfOutgoingShippingForToday(int authorisationId) {
         validationService.assertAdmin(authorisationId);
 
         List<ItemGroupDTOWithAddress> outgoingItems = orderRepository.findAll()

@@ -6,12 +6,12 @@ import java.util.List;
 
 public class OrderDTO {
     private String orderId;
-    private String customerId;
+    private Integer customerId;
     private List<ItemGroupDTO> orderedItems;
     private double totalPrice;
 
 
-    public OrderDTO setCustomerId(String customerId) {
+    public OrderDTO setCustomerId(Integer customerId) {
         this.customerId = customerId;
         return this;
     }
@@ -39,11 +39,11 @@ public class OrderDTO {
         return this;
     }
 
-    public String getCustomer() {
+    public Integer getCustomerId() {
         return customerId;
     }
 
-    public String getId() {
+    public String getOrderId() {
         return orderId;
     }
 }

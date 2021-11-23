@@ -25,28 +25,28 @@ public class ItemController {
 
     @PostMapping(produces = "application/json", consumes = "application/json", params = "authorisationId")
     @ResponseStatus(HttpStatus.CREATED)
-    public ItemWithStockDTO createItem(@RequestParam(value = "authorisationId") String authorisationId, @RequestBody CreateItemDTO dto) {
+    public ItemWithStockDTO createItem(@RequestParam(value = "authorisationId") int authorisationId, @RequestBody CreateItemDTO dto) {
         logger.info("Item creation called by user " + authorisationId);
         return itemService.createNewItem(authorisationId, dto);
     }
 
     @GetMapping(produces = "application/json", params = "authorisationId")
     @ResponseStatus(HttpStatus.OK)
-    public List<ItemWithStockDTO> getAllItemsByStock(@RequestParam(value = "authorisationId") String authorisationId) {
+    public List<ItemWithStockDTO> getAllItemsByStock(@RequestParam(value = "authorisationId") int authorisationId) {
         logger.info("Get all items by stock urgency called by user " + authorisationId);
         return itemService.getAllItemsByStock(authorisationId);
     }
 
     @GetMapping(produces = "application/json", params = {"authorisationId", "urgency"})
     @ResponseStatus(HttpStatus.OK)
-    public List<ItemWithStockDTO> getItemsByUrgency(@RequestParam(value = "authorisationId") String authorisationId, @RequestParam(value = "urgency", required = false) String urgency) {
+    public List<ItemWithStockDTO> getItemsByUrgency(@RequestParam(value = "authorisationId") int authorisationId, @RequestParam(value = "urgency", required = false) String urgency) {
         logger.info("Get item filtered by urgency called by user " + authorisationId);
         return itemService.getItemsByUrgency(authorisationId, urgency);
     }
 
     @PutMapping(produces = "application/json", consumes = "application/json", path = "/{itemId}", params = "authorisationId")
     @ResponseStatus(HttpStatus.OK)
-    public ItemWithStockDTO updateItem(@RequestParam(value = "authorisationId") String authorisationId, @PathVariable("itemId") String itemId, @RequestBody UpdateItemDTO dto) {
+    public ItemWithStockDTO updateItem(@RequestParam(value = "authorisationId") int authorisationId, @PathVariable("itemId") String itemId, @RequestBody UpdateItemDTO dto) {
         logger.info("Item update called by user " + authorisationId);
         return itemService.updateItem(authorisationId, itemId, dto);
     }

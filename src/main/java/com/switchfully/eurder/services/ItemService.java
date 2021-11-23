@@ -32,7 +32,7 @@ public class ItemService {
     }
 
 
-    public ItemWithStockDTO createNewItem(String authorisationId, CreateItemDTO dto) {
+    public ItemWithStockDTO createNewItem(int authorisationId, CreateItemDTO dto) {
         validationService.assertAdmin(authorisationId);
         if (validationService.isValidCreateItemDTO(dto)) {
             Item newItem = itemMapper.toItem(dto);
@@ -43,7 +43,7 @@ public class ItemService {
             throw new IllegalArgumentException("Your parameters for the new item are not valid");
     }
 
-    public ItemWithStockDTO updateItem(String authorisationId, String itemId, UpdateItemDTO dto) {
+    public ItemWithStockDTO updateItem(int authorisationId, String itemId, UpdateItemDTO dto) {
         validationService.assertAdmin(authorisationId);
         Item toUpdate;
         Item updatedItem;
@@ -59,7 +59,7 @@ public class ItemService {
             throw new IllegalArgumentException("Your parameters for the new item are not valid");
     }
 
-    public List<ItemWithStockDTO> getAllItemsByStock(String authorisationId) {
+    public List<ItemWithStockDTO> getAllItemsByStock(int authorisationId) {
         validationService.assertAdmin(authorisationId);
         logger.info("Stock info called by admin " + authorisationId);
 
@@ -80,7 +80,7 @@ public class ItemService {
         return stockLow;
     }
 
-    public List<ItemWithStockDTO> getItemsByUrgency(String authorisationId, String urgency) {
+    public List<ItemWithStockDTO> getItemsByUrgency(int authorisationId, String urgency) {
         validationService.assertAdmin(authorisationId);
         urgency = urgency.toLowerCase();
         logger.info("Stock info of urgency " + urgency + " called by admin " + authorisationId);

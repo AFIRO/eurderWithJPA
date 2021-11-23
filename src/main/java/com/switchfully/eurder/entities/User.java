@@ -11,7 +11,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_sequence")
     @SequenceGenerator(name = "user_id_sequence", sequenceName = "user_id_sequence", allocationSize = 1)
     @Column(name = "user_id", nullable = false)
-    private String userId;
+    private Integer userId;
     @Column(name = "user_first_name")
     private String firstName;
     @Column(name = "user_last_name")
@@ -51,30 +51,18 @@ public class User {
         return email;
     }
 
-    public User setEmail(String email) {
-        this.email = email;
-        return this;
-    }
 
     public String getAddress() {
         return address;
     }
 
-    public User setAddress(String address) {
-        this.address = address;
-        return this;
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public User setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-        return this;
-    }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 

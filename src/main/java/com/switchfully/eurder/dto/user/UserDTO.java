@@ -1,18 +1,18 @@
 package com.switchfully.eurder.dto.user;
 
 public class UserDTO {
-    private String id;
+    private Integer id;
     private String firstName;
     private String lastName;
     private String email;
     private String address;
     private String phoneNumber;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public UserDTO setId(String id) {
+    public UserDTO setId(Integer id) {
         this.id = id;
         return this;
     }

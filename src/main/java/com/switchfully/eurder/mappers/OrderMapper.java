@@ -33,7 +33,7 @@ public class OrderMapper {
         this.orderRepository = orderRepository;
     }
 
-    public Order toOrder(String customerId, CreateOrderDTO dto) {
+    public Order toOrder(int customerId, CreateOrderDTO dto) {
         List<ItemGroup> orderedItems = dto.getOrderedItems().stream()
                 .map(this::toItemGroup)
                 .collect(Collectors.toList());

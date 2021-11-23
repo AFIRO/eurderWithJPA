@@ -21,7 +21,7 @@ public class ShippingController {
 
     @GetMapping(produces = "application/json", params = {"authorisationId"})
     @ResponseStatus(HttpStatus.OK)
-    public ShippingReportDTO getReportOfOutgoingShippingForToday(@RequestParam(value = "authorisationId") String authorisationId) {
+    public ShippingReportDTO getReportOfOutgoingShippingForToday(@RequestParam(value = "authorisationId") int authorisationId) {
 
         logger.info("Shipping report called by user " + authorisationId);
         return orderService.getReportOfOutgoingShippingForToday(authorisationId);

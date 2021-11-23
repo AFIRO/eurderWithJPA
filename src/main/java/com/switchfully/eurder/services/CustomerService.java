@@ -39,7 +39,7 @@ public class CustomerService {
             throw new IllegalArgumentException("The parameters supplied for your user account are not valid");
     }
 
-    public UserDTO saveNewAdmin(String authorisationId, CreateUserDTO dto) {
+    public UserDTO saveNewAdmin(int authorisationId, CreateUserDTO dto) {
         validationService.assertAdmin(authorisationId);
         if (validationService.IsValidCreateUserDTO(dto)) {
             User newUser = customerMapper.toUser(dto);
@@ -53,7 +53,7 @@ public class CustomerService {
     }
 
 
-    public List<UserDTO> getAllUsers(String authorisationId) {
+    public List<UserDTO> getAllUsers(int authorisationId) {
         validationService.assertAdmin(authorisationId);
         logger.info("Info of all users called by admin " + authorisationId);
         return customerRepository.findAll()
@@ -63,7 +63,7 @@ public class CustomerService {
     }
 
 
-    public UserDTO getSpecificUser(String authorisationId, String customerId) {
+    public UserDTO getSpecificUser(int authorisationId, int customerId) {
         validationService.assertAdmin(authorisationId);
         logger.info("Info of User " + customerId + "called by admin " + authorisationId);
         return customerMapper.toDTO(customerRepository.findByUserId(customerId));

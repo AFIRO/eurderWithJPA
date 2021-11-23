@@ -69,15 +69,9 @@ public class ValidationService {
     }
 
 
-    public void assertAdmin(String id) {
-        List<String> toValidateAgainst =
-                customerRepository
-                        .findAll()
-                        .stream()
-                        .filter(User::isAdmin)
-                        .map(User::getUserId)
-                        .collect(Collectors.toList());
-        if (!toValidateAgainst.contains(id))
+    public void assertAdmin(int id) {
+        User toValidateAgainst = customerRepository.findByUserId(id);
+        if (toValidateAgainst == null || !toValidateAgainst.isAdmin())
             throw new AuthorisationException();
     }
 
