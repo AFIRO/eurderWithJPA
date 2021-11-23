@@ -4,7 +4,7 @@ import com.switchfully.eurder.entities.Item;
 
 public class ItemWithStockDTO {
 
-    private String itemId;
+    private Integer itemId;
     private String name;
     private String Description;
     private double price;
@@ -38,11 +38,11 @@ public class ItemWithStockDTO {
         return this;
     }
 
-    public String getItemId() {
+    public Integer getItemId() {
         return itemId;
     }
 
-    public ItemWithStockDTO setItemId(String itemId) {
+    public ItemWithStockDTO setItemId(Integer itemId) {
         this.itemId = itemId;
         return this;
     }

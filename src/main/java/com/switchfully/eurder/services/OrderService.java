@@ -43,7 +43,7 @@ public class OrderService {
     }
 
     public OrderDTO createNewOrder(int customerId, CreateOrderDTO dto) {
-        if (validationService.isValidCreateOrderDTO(dto) && customerRepository.existsByUserId(customerId)) {
+        if (customerRepository.existsByUserId(customerId)) {
             Order newOrder = orderMapper.toOrder(customerId, dto);
             orderRepository.save(newOrder);
             logger.info("Order with id " + newOrder.getOrderId() + " saved");
@@ -52,7 +52,7 @@ public class OrderService {
             throw new IllegalArgumentException("The parameters for your order are invalid");
     }
 
-    public OrderDTO reorderExistingOrder(int customerId, String orderId) {
+    public OrderDTO reorderExistingOrder(int customerId, Integer orderId) {
         Order existingOrder = orderRepository.findByOrderId(orderId);
         Order newOrder = new Order();
 

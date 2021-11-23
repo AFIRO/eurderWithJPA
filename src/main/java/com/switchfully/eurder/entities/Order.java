@@ -15,7 +15,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_id_sequence")
     @SequenceGenerator(name = "order_id_sequence", sequenceName = "order_id_sequence", allocationSize = 1)
     @Column(name = "order_id", nullable = false)
-    private String orderId;
+    private Integer orderId;
     @OneToMany
     @JoinColumn(name = "order_fk")
     private List<ItemGroup> orderedItems;
@@ -36,7 +36,7 @@ public class Order {
         return this;
     }
 
-    public Order addItemToOrder(String itemId, int numberOfItems) {
+    public Order addItemToOrder(Integer itemId, int numberOfItems) {
         Item itemToAdd = itemRepository.findItemByItemId(itemId);
         orderedItems.add(new ItemGroup(itemToAdd, numberOfItems));
         calculateTotalPrice();
@@ -72,7 +72,7 @@ public class Order {
         return this;
     }
 
-    public String getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 

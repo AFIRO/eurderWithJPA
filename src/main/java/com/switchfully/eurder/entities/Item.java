@@ -13,7 +13,7 @@ public class Item {
     @SequenceGenerator(name = "item_id_seq", sequenceName = "item_id_seq", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_id_seq")
     @Column(name = "item_id", nullable = false)
-    private String itemId;
+    private Integer itemId;
     @Column(name = "item_name")
     private String name;
     @Column(name = "item_description")
@@ -74,7 +74,7 @@ public class Item {
         return this;
     }
 
-    public String getItemId() {
+    public Integer getItemId() {
         return itemId;
     }
 

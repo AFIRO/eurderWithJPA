@@ -5,7 +5,7 @@ import com.switchfully.eurder.dto.itemgroup.ItemGroupDTO;
 import java.util.List;
 
 public class OrderDTO {
-    private String orderId;
+    private Integer orderId;
     private Integer customerId;
     private List<ItemGroupDTO> orderedItems;
     private double totalPrice;
@@ -16,7 +16,7 @@ public class OrderDTO {
         return this;
     }
 
-    public OrderDTO setOrderId(String orderId) {
+    public OrderDTO setOrderId(Integer orderId) {
         this.orderId = orderId;
         return this;
     }
@@ -43,7 +43,7 @@ public class OrderDTO {
         return customerId;
     }
 
-    public String getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 }

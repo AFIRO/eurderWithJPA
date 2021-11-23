@@ -43,7 +43,7 @@ public class ItemService {
             throw new IllegalArgumentException("Your parameters for the new item are not valid");
     }
 
-    public ItemWithStockDTO updateItem(int authorisationId, String itemId, UpdateItemDTO dto) {
+    public ItemWithStockDTO updateItem(int authorisationId, Integer itemId, UpdateItemDTO dto) {
         validationService.assertAdmin(authorisationId);
         Item toUpdate;
         Item updatedItem;

@@ -11,8 +11,8 @@ public interface ItemRepository extends JpaRepository<Item, String> {
 
     List<Item> findAll();
 
-    boolean existsByItemId(String itemId);
+    boolean existsByItemId(Integer itemId);
 
-    Item findItemByItemId(String itemId);
+    Item findItemByItemId(Integer itemId);
 
 }

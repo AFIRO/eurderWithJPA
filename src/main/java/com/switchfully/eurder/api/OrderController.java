@@ -30,7 +30,7 @@ public class OrderController {
 
     @PostMapping(produces = "application/json", params = {"customerId", "orderId"})
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderDTO reorderExistingOrder(@RequestParam(value = "customerId") int customerId, @RequestParam(value = "orderId", required = false) String orderId) {
+    public OrderDTO reorderExistingOrder(@RequestParam(value = "customerId") int customerId, @RequestParam(value = "orderId", required = false) Integer orderId) {
         logger.info("Reorder existing order called by user " + customerId);
         return orderService.reorderExistingOrder(customerId, orderId);
     }

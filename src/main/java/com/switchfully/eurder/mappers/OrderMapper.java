@@ -59,7 +59,7 @@ public class OrderMapper {
 
     public ItemGroup toItemGroup(CreateItemGroupDTO dto) {
         Item itemToAdd = itemRepository.findItemByItemId(dto.getItemId());
-        return new ItemGroup(itemToAdd, Integer.parseInt(dto.getAmountToOrder()));
+        return new ItemGroup(itemToAdd, dto.getAmountToOrder());
     }
 
     private ItemGroupDTO toItemGroupDTO(ItemGroup itemGroup) {

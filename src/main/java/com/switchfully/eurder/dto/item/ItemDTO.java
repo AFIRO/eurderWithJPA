@@ -2,7 +2,7 @@ package com.switchfully.eurder.dto.item;
 
 public class ItemDTO {
 
-    private String itemId;
+    private Integer itemId;
     private String name;
     private String Description;
     private double price;
@@ -34,11 +34,11 @@ public class ItemDTO {
         return this;
     }
 
-    public String getItemId() {
+    public Integer getItemId() {
         return itemId;
     }
 
-    public ItemDTO setItemId(String itemId) {
+    public ItemDTO setItemId(Integer itemId) {
         this.itemId = itemId;
         return this;
     }
