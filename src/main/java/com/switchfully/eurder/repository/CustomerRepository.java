@@ -14,12 +14,12 @@ public class CustomerRepository {
     public CustomerRepository() {
         savedUsersById = new ConcurrentHashMap();
         User rootAdmin = new User("root", "admin", "admin@admin.admin", "admin", "admin").setAdmin();
-        System.out.println("Root admin for testing  = " + rootAdmin.getId());
-        savedUsersById.put(rootAdmin.getId(), rootAdmin);
+        System.out.println("Root admin for testing  = " + rootAdmin.getUserId());
+        savedUsersById.put(rootAdmin.getUserId(), rootAdmin);
     }
 
     public void saveUser(User user) {
-        savedUsersById.put(user.getId(), user);
+        savedUsersById.put(user.getUserId(), user);
     }
 
     public Map<String, User> getAllUsers() {

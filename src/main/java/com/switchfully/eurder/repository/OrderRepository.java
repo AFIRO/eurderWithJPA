@@ -1,6 +1,5 @@
 package com.switchfully.eurder.repository;
 
-import com.switchfully.eurder.dto.OrderDTO;
 import com.switchfully.eurder.entities.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,7 +22,7 @@ public class OrderRepository {
 
 
     public void saveOrder(Order newOrder) {
-        ordersByOrderId.put(newOrder.getId(),newOrder);
+        ordersByOrderId.put(newOrder.getGroupId(),newOrder);
     }
 
     public Order getSpecificOrder(String orderId) {
@@ -36,7 +35,7 @@ public class OrderRepository {
     public List<Order> getAllOrdersOfSpecificUser(String customerId) {
         return ordersByOrderId.values()
                 .stream()
-                .filter(order -> order.getCustomer().getId().equals(customerId))
+                .filter(order -> order.getCustomer().getUserId().equals(customerId))
                 .collect(Collectors.toList());
     }
 

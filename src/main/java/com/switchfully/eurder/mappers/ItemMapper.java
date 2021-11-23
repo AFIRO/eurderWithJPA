@@ -28,7 +28,7 @@ public class ItemMapper {
 
     public ItemDTO toItemDTO(Item item) {
         return new ItemDTO()
-                .setItemId(item.getId())
+                .setItemId(item.getItemId())
                 .setName(item.getName())
                 .setDescription(item.getDescription())
                 .setPrice(item.getPrice());
@@ -36,7 +36,7 @@ public class ItemMapper {
 
     public ItemWithStockDTO toItemWithStockDTO(Item item) {
         return new ItemWithStockDTO()
-                .setItemId(item.getId())
+                .setItemId(item.getItemId())
                 .setName(item.getName())
                 .setDescription(item.getDescription())
                 .setPrice(item.getPrice())

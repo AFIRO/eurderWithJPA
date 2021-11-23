@@ -2,8 +2,10 @@ package com.switchfully.eurder.entities;
 
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
+@Table(name = "item")
 public class Item {
     public enum StockUrgencyIndicator {STOCK_LOW,STOCK_MEDIUM,STOCK_HIGH}
 
@@ -11,7 +13,7 @@ public class Item {
     @SequenceGenerator(name = "item_id_seq", sequenceName = "item_id_seq", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_id_seq")
     @Column (name = "item_id", nullable = false)
-    private  String id;
+    private  String itemId;
     @Column (name = "item_name")
     private String name;
     @Column (name = "item_description")
@@ -76,11 +78,24 @@ public class Item {
         return amountInStock;
     }
 
-    public String getId() {
-        return id;
+    public String getItemId() {
+        return itemId;
     }
 
     public StockUrgencyIndicator getStockUrgencyIndicator() {
         return stockUrgencyIndicator;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Item)) return false;
+        Item item = (Item) o;
+        return Objects.equals(getItemId(), item.getItemId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getItemId());
     }
 }

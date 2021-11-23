@@ -4,7 +4,6 @@ import com.switchfully.eurder.dto.*;
 import com.switchfully.eurder.entities.ItemGroup;
 import com.switchfully.eurder.entities.Order;
 import com.switchfully.eurder.exceptions.AuthorisationException;
-import com.switchfully.eurder.mappers.ItemMapper;
 import com.switchfully.eurder.mappers.OrderMapper;
 import com.switchfully.eurder.repository.CustomerRepository;
 import com.switchfully.eurder.repository.ItemRepository;
@@ -41,7 +40,7 @@ public class OrderService {
         if (validationService.isValidCreateOrderDTO(dto) && customerRepository.getAllUsers().containsKey(customerId)) {
             Order newOrder = orderMapper.toOrder(customerId, dto);
             orderRepository.saveOrder(newOrder);
-            logger.info("Order with id " + newOrder.getId() + " saved");
+            logger.info("Order with id " + newOrder.getGroupId() + " saved");
             return orderMapper.toOrderDTO(newOrder);
         } else
             throw new IllegalArgumentException("The parameters for your order are invalid");
@@ -51,12 +50,12 @@ public class OrderService {
         Order existingOrder = orderRepository.getSpecificOrder(orderId);
         Order newOrder = new Order(itemRepository);
 
-        if (existingOrder.getCustomer().getId().equals(customerId)) {
+        if (existingOrder.getCustomer().getUserId().equals(customerId)) {
             for (ItemGroup itemGroup : existingOrder.getOrderedItems())
-                newOrder.addItemToOrder(itemGroup.getItem().getId(), itemGroup.getAmountToOrder());
+                newOrder.addItemToOrder(itemGroup.getItem().getItemId(), itemGroup.getAmountToOrder());
             newOrder.setCustomer(existingOrder.getCustomer());
             orderRepository.saveOrder(newOrder);
-            logger.info("Order with id " + newOrder.getId() + " saved");
+            logger.info("Order with id " + newOrder.getGroupId() + " saved");
             return orderMapper.toOrderDTO(newOrder);
         } else throw new AuthorisationException("You are not allowed to reorder this specific order.");
     }

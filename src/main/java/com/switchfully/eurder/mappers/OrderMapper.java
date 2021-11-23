@@ -46,8 +46,8 @@ public class OrderMapper {
                 .collect(Collectors.toList());
 
         return new OrderDTO()
-                .setOrderId(order.getId())
-                .setCustomerId(order.getCustomer().getId())
+                .setOrderId(order.getGroupId())
+                .setCustomerId(order.getCustomer().getUserId())
                 .setOrderedItems(orderedItems)
                 .setTotalPrice(order.getTotalPrice());
     }

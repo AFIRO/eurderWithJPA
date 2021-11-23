@@ -1,7 +1,6 @@
 package com.switchfully.eurder.services;
 
 import com.switchfully.eurder.dto.CreateItemDTO;
-import com.switchfully.eurder.dto.ItemDTO;
 import com.switchfully.eurder.dto.ItemWithStockDTO;
 import com.switchfully.eurder.dto.UpdateItemDTO;
 import com.switchfully.eurder.entities.Item;
@@ -36,7 +35,7 @@ public class ItemService {
         if (validationService.isValidCreateItemDTO(dto)) {
             Item newItem = itemMapper.toItem(dto);
             itemRepository.saveNewItem(newItem);
-            logger.info("Item with ID " + newItem.getId() + " created");
+            logger.info("Item with ID " + newItem.getItemId() + " created");
             return itemMapper.toItemWithStockDTO(newItem);
         } else
             throw new IllegalArgumentException("Your parameters for the new item are not valid");
@@ -51,7 +50,7 @@ public class ItemService {
             toUpdate = itemRepository.getItem(itemId);
             updatedItem = itemMapper.updateItem(toUpdate, dto);
             itemRepository.updateItem(updatedItem);
-            logger.info("Item with ID " + updatedItem.getId() + " updated");
+            logger.info("Item with ID " + updatedItem.getItemId() + " updated");
             return itemMapper.toItemWithStockDTO(updatedItem);
         }
         else

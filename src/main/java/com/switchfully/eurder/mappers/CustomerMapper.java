@@ -18,6 +18,6 @@ public class CustomerMapper {
                 .setAddress(user.getAddress())
                 .setEmail(user.getEmail())
                 .setPhoneNumber(user.getPhoneNumber())
-                .setId(user.getId());
+                .setId(user.getUserId());
     }
 }

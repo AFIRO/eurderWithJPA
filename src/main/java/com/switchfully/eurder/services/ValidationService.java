@@ -73,7 +73,7 @@ public class ValidationService {
                         .values()
                         .stream()
                         .filter(User::isAdmin)
-                        .map(User::getId)
+                        .map(User::getUserId)
                         .collect(Collectors.toList());
         if (!toValidateAgainst.contains(id))
             throw new AuthorisationException();

@@ -31,7 +31,7 @@ public class CustomerService {
         if (validationService.IsValidCreateUserDTO(dto)) {
             User newUser = customerMapper.toUser(dto);
             customerRepository.saveUser(newUser);
-            logger.info("User with the following id has been created: " + newUser.getId());
+            logger.info("User with the following id has been created: " + newUser.getUserId());
             return customerMapper.toDTO(newUser);
         } else
             throw new IllegalArgumentException("The parameters supplied for your user account are not valid");
@@ -43,7 +43,7 @@ public class CustomerService {
             User newUser = customerMapper.toUser(dto);
             newUser.setAdmin();
             customerRepository.saveUser(newUser);
-            logger.info("User with the following id has been created: " + newUser.getId());
+            logger.info("User with the following id has been created: " + newUser.getUserId());
             return customerMapper.toDTO(newUser);
         } else
             throw new IllegalArgumentException("The parameters supplied for your user account are not valid");

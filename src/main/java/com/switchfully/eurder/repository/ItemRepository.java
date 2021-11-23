@@ -17,7 +17,7 @@ public class ItemRepository {
 
 
     public void saveNewItem(Item item) {
-        itemsById.put(item.getId(), item);
+        itemsById.put(item.getItemId(), item);
     }
 
 
@@ -33,6 +33,6 @@ public class ItemRepository {
     }
 
     public void updateItem(Item updatedItem) {
-        itemsById.replace(updatedItem.getId(), updatedItem);
+        itemsById.replace(updatedItem.getItemId(), updatedItem);
     }
 }

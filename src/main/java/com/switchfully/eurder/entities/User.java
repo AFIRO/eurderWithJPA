@@ -1,22 +1,39 @@
 package com.switchfully.eurder.entities;
 
 
+import javax.persistence.*;
+import java.util.Objects;
 import java.util.UUID;
 
-
+@Entity
+@Table(name = "user")
 public class User {
     public enum Role {CUSTOMER, ADMIN}
-    private final String id;
-    private final String firstName;
-    private final String lastName;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_sequence")
+    @SequenceGenerator(name = "user_id_sequence", sequenceName = "user_id_sequence", allocationSize = 1)
+    @Column(name = "user_id", nullable = false)
+    private  String userId;
+    @Column (name = "user_first_name")
+    private  String firstName;
+    @Column (name = "user_last_name")
+    private  String lastName;
+    @Column (name = "user_email")
     private String email;
+    @Column (name = "user_address")
     private String address;
+    @Column (name = "user_phonenumber")
     private String phoneNumber;
+    @Column (name = "user_role")
+    @Enumerated(EnumType.STRING)
     private Role role;
 
+    public User() {
+
+    }
 
     public User(String firstName, String lastName, String email, String address, String phoneNumber) {
-        this.id = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -45,12 +62,16 @@ public class User {
         return phoneNumber;
     }
 
-    public String getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
     public boolean isAdmin() {
         return role.equals(Role.ADMIN);
+    }
+
+    public Role getRole() {
+        return role;
     }
 
     public User setAdmin() {
@@ -71,5 +92,18 @@ public class User {
     public User setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(getUserId(), user.getUserId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUserId());
     }
 }
