@@ -1,20 +1,33 @@
 package com.switchfully.eurder.entities;
 
-import java.util.UUID;
 
+import javax.persistence.*;
+
+@Entity
 public class Item {
     public enum StockUrgencyIndicator {STOCK_LOW,STOCK_MEDIUM,STOCK_HIGH}
-    private final String id;
+
+    @Id
+    @SequenceGenerator(name = "item_id_seq", sequenceName = "item_id_seq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_id_seq")
+    @Column (name = "item_id", nullable = false)
+    private  String id;
+    @Column (name = "item_name")
     private String name;
+    @Column (name = "item_description")
     private String Description;
+    @Column (name = "item_price")
     private double price;
+    @Column (name = "item_stock")
     private int amountInStock;
+    @Column (name = "item_urgency")
+    @Enumerated(EnumType.STRING)
     private StockUrgencyIndicator stockUrgencyIndicator;
+
     private static final int HIGH_STOCK_THRESHOLD = 10;
     private static final int MEDIUM_STOCK_THRESHOLD = 5;
 
     public Item() {
-        this.id = UUID.randomUUID().toString();
     }
 
     public Item setName(String name) {
