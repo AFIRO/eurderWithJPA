@@ -1,7 +1,6 @@
-package com.switchfully.eurder.dto;
+package com.switchfully.eurder.dto.order;
 
-import com.switchfully.eurder.entities.ItemGroup;
-import com.switchfully.eurder.entities.User;
+import com.switchfully.eurder.dto.itemgroup.ItemGroupDTO;
 
 import java.util.List;
 
@@ -10,7 +9,6 @@ public class OrderDTO {
     private String customerId;
     private List<ItemGroupDTO> orderedItems;
     private double totalPrice;
-
 
 
     public OrderDTO setCustomerId(String customerId) {
@@ -23,22 +21,22 @@ public class OrderDTO {
         return this;
     }
 
+    public List<ItemGroupDTO> getOrderedItems() {
+        return orderedItems;
+    }
+
     public OrderDTO setOrderedItems(List<ItemGroupDTO> orderedItems) {
         this.orderedItems = orderedItems;
         return this;
     }
 
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
     public OrderDTO setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
         return this;
-    }
-
-    public List<ItemGroupDTO> getOrderedItems() {
-        return orderedItems;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
     }
 
     public String getCustomer() {

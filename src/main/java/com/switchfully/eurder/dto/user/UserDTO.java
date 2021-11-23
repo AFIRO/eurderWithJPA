@@ -1,4 +1,4 @@
-package com.switchfully.eurder.dto;
+package com.switchfully.eurder.dto.user;
 
 public class UserDTO {
     private String id;
@@ -8,9 +8,17 @@ public class UserDTO {
     private String address;
     private String phoneNumber;
 
+    public String getId() {
+        return id;
+    }
+
     public UserDTO setId(String id) {
         this.id = id;
         return this;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
     public UserDTO setFirstName(String firstName) {
@@ -18,9 +26,17 @@ public class UserDTO {
         return this;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
     public UserDTO setLastName(String lastName) {
         this.lastName = lastName;
         return this;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public UserDTO setEmail(String email) {
@@ -28,37 +44,21 @@ public class UserDTO {
         return this;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
     public UserDTO setAddress(String address) {
         this.address = address;
         return this;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
     public UserDTO setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
         return this;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
     }
 }

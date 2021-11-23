@@ -1,7 +1,7 @@
 package com.switchfully.eurder.api;
 
-import com.switchfully.eurder.dto.createUserDTO;
-import com.switchfully.eurder.dto.UserDTO;
+import com.switchfully.eurder.dto.user.CreateUserDTO;
+import com.switchfully.eurder.dto.user.UserDTO;
 import com.switchfully.eurder.services.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public class CustomerController {
 
     @PostMapping(produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDTO createUser(@RequestBody createUserDTO dto){
+    public UserDTO createUser(@RequestBody CreateUserDTO dto) {
         logger.info("New user creation called");
         return customerService.saveNewUser(dto);
 
@@ -32,7 +32,7 @@ public class CustomerController {
 
     @PostMapping(produces = "application/json", consumes = "application/json", params = "authorisationId")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDTO createAdmin(@RequestParam(value = "authorisationId", required = false) String authorisationId, @RequestBody createUserDTO dto){
+    public UserDTO createAdmin(@RequestParam(value = "authorisationId", required = false) String authorisationId, @RequestBody CreateUserDTO dto) {
         logger.info("New admin creation called by admin " + authorisationId);
         return customerService.saveNewAdmin(authorisationId, dto);
 
@@ -40,14 +40,14 @@ public class CustomerController {
 
     @GetMapping(produces = "application/json", params = "authorisationId")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserDTO> getAllUsersAsAdmin(@RequestParam("authorisationId") String authorisationId){
+    public List<UserDTO> getAllUsersAsAdmin(@RequestParam("authorisationId") String authorisationId) {
         logger.info("Get all users called by admin " + authorisationId);
         return customerService.getAllUsers(authorisationId);
     }
 
     @GetMapping(produces = "application/json", params = {"authorisationId", "customerId"})
     @ResponseStatus(HttpStatus.OK)
-    public UserDTO getSpecificUser(@RequestParam("authorisationId") String authorisationId, @RequestParam (value = "customerId", required = false) String customerId ){
+    public UserDTO getSpecificUser(@RequestParam("authorisationId") String authorisationId, @RequestParam(value = "customerId", required = false) String customerId) {
         logger.info("Get specific users called by admin " + authorisationId + " for user " + customerId);
         return customerService.getSpecificUser(authorisationId, customerId);
     }

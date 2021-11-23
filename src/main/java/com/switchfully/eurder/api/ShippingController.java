@@ -1,7 +1,6 @@
 package com.switchfully.eurder.api;
 
-import com.switchfully.eurder.dto.ItemDTO;
-import com.switchfully.eurder.dto.ShippingReportDTO;
+import com.switchfully.eurder.dto.report.ShippingReportDTO;
 import com.switchfully.eurder.services.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

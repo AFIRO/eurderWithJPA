@@ -1,34 +1,19 @@
 package com.switchfully.eurder.repository;
 
 import com.switchfully.eurder.entities.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
 
 @Repository
-public class CustomerRepository {
-    private final Map<String, User> savedUsersById;
+public interface CustomerRepository extends JpaRepository<User, String> {
 
-    public CustomerRepository() {
-        savedUsersById = new ConcurrentHashMap();
-        User rootAdmin = new User("root", "admin", "admin@admin.admin", "admin", "admin").setAdmin();
-        System.out.println("Root admin for testing  = " + rootAdmin.getUserId());
-        savedUsersById.put(rootAdmin.getUserId(), rootAdmin);
-    }
 
-    public void saveUser(User user) {
-        savedUsersById.put(user.getUserId(), user);
-    }
+    List<User> findAll();
 
-    public Map<String, User> getAllUsers() {
-        return savedUsersById;
-    }
+    User findByUserId(String customerId);
 
-    public User getSpecificUser(String customerId) {
-        if (savedUsersById.containsKey(customerId))
-            return savedUsersById.get(customerId);
-        else throw new NoSuchElementException("The customer linked to this order does not exist");
-    }
+    int countAllByUserId(String userId);
+
 }

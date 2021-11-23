@@ -1,6 +1,10 @@
 package com.switchfully.eurder.mappers;
 
-import com.switchfully.eurder.dto.*;
+import com.switchfully.eurder.dto.itemgroup.CreateItemGroupDTO;
+import com.switchfully.eurder.dto.itemgroup.ItemGroupDTO;
+import com.switchfully.eurder.dto.itemgroup.ItemGroupDTOWithAddress;
+import com.switchfully.eurder.dto.order.CreateOrderDTO;
+import com.switchfully.eurder.dto.order.OrderDTO;
 import com.switchfully.eurder.entities.Item;
 import com.switchfully.eurder.entities.ItemGroup;
 import com.switchfully.eurder.entities.Order;
@@ -34,8 +38,8 @@ public class OrderMapper {
                 .map(this::toItemGroup)
                 .collect(Collectors.toList());
 
-        return new Order(itemRepository)
-                .setCustomer(customerRepository.getSpecificUser(customerId))
+        return new Order()
+                .setCustomer(customerRepository.findByUserId(customerId))
                 .addListOfItemGroupToOrder(orderedItems);
     }
 
@@ -46,7 +50,7 @@ public class OrderMapper {
                 .collect(Collectors.toList());
 
         return new OrderDTO()
-                .setOrderId(order.getGroupId())
+                .setOrderId(order.getOrderId())
                 .setCustomerId(order.getCustomer().getUserId())
                 .setOrderedItems(orderedItems)
                 .setTotalPrice(order.getTotalPrice());
@@ -54,7 +58,7 @@ public class OrderMapper {
 
 
     public ItemGroup toItemGroup(CreateItemGroupDTO dto) {
-        Item itemToAdd = itemRepository.getItem(dto.getItemId());
+        Item itemToAdd = itemRepository.findItemByItemId(dto.getItemId());
         return new ItemGroup(itemToAdd, Integer.parseInt(dto.getAmountToOrder()));
     }
 
@@ -67,7 +71,7 @@ public class OrderMapper {
     }
 
     public ItemGroupDTOWithAddress toItemGroupDTOWithAddress(ItemGroup itemGroup) {
-        String address = orderRepository.getAllOrders()
+        String address = orderRepository.findAll()
                 .stream()
                 .filter(order -> order.getOrderedItems().contains(itemGroup))
                 .map(Order::getCustomer)

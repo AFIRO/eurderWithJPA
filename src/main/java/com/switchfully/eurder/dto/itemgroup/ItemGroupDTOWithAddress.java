@@ -1,4 +1,6 @@
-package com.switchfully.eurder.dto;
+package com.switchfully.eurder.dto.itemgroup;
+
+import com.switchfully.eurder.dto.item.ItemDTO;
 
 import java.time.LocalDate;
 
@@ -9,9 +11,17 @@ public class ItemGroupDTOWithAddress {
     private String addressToShipTo;
     private LocalDate shippingDate;
 
+    public ItemDTO getItem() {
+        return item;
+    }
+
     public ItemGroupDTOWithAddress setItem(ItemDTO item) {
         this.item = item;
         return this;
+    }
+
+    public int getAmountToOrder() {
+        return amountToOrder;
     }
 
     public ItemGroupDTOWithAddress setAmountToOrder(int amountToOrder) {
@@ -19,9 +29,17 @@ public class ItemGroupDTOWithAddress {
         return this;
     }
 
+    public double getCostForItemGroup() {
+        return costForItemGroup;
+    }
+
     public ItemGroupDTOWithAddress setCostForItemGroup(double costForItemGroup) {
         this.costForItemGroup = costForItemGroup;
         return this;
+    }
+
+    public String getAddressToShipTo() {
+        return addressToShipTo;
     }
 
     public ItemGroupDTOWithAddress setAddressToShipTo(String addressToShipTo) {
@@ -29,28 +47,12 @@ public class ItemGroupDTOWithAddress {
         return this;
     }
 
+    public LocalDate getShippingDate() {
+        return shippingDate;
+    }
+
     public ItemGroupDTOWithAddress setShippingDate(LocalDate shippingDate) {
         this.shippingDate = shippingDate;
         return this;
-    }
-
-    public ItemDTO getItem() {
-        return item;
-    }
-
-    public int getAmountToOrder() {
-        return amountToOrder;
-    }
-
-    public double getCostForItemGroup() {
-        return costForItemGroup;
-    }
-
-    public String getAddressToShipTo() {
-        return addressToShipTo;
-    }
-
-    public LocalDate getShippingDate() {
-        return shippingDate;
     }
 }

@@ -15,7 +15,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_id_sequence")
     @SequenceGenerator(name = "order_id_sequence", sequenceName = "order_id_sequence", allocationSize = 1)
     @Column(name = "order_id", nullable = false)
-    private String groupId;
+    private String orderId;
     @OneToMany
     @JoinColumn(name = "order_fk")
     private List<ItemGroup> orderedItems;
@@ -27,14 +27,8 @@ public class Order {
     @Transient
     private ItemRepository itemRepository;
 
-    @Autowired
-    public Order(ItemRepository itemRepository) {
-        this.itemRepository = itemRepository;
-        orderedItems = new ArrayList();
-    }
 
     public Order() {
-
     }
 
     public Order calculateTotalPrice() {
@@ -43,7 +37,7 @@ public class Order {
     }
 
     public Order addItemToOrder(String itemId, int numberOfItems) {
-        Item itemToAdd = itemRepository.getItem(itemId);
+        Item itemToAdd = itemRepository.findItemByItemId(itemId);
         orderedItems.add(new ItemGroup(itemToAdd, numberOfItems));
         calculateTotalPrice();
         return this;
@@ -61,12 +55,6 @@ public class Order {
         return this;
     }
 
-
-    public Order setCustomer(User customer) {
-        this.customer = customer;
-        return this;
-    }
-
     public List<ItemGroup> getOrderedItems() {
         return orderedItems;
     }
@@ -79,8 +67,13 @@ public class Order {
         return customer;
     }
 
-    public String getGroupId() {
-        return groupId;
+    public Order setCustomer(User customer) {
+        this.customer = customer;
+        return this;
+    }
+
+    public String getOrderId() {
+        return orderId;
     }
 
     @Override
@@ -88,11 +81,11 @@ public class Order {
         if (this == o) return true;
         if (!(o instanceof Order)) return false;
         Order order = (Order) o;
-        return Objects.equals(getGroupId(), order.getGroupId());
+        return Objects.equals(getOrderId(), order.getOrderId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getGroupId());
+        return Objects.hash(getOrderId());
     }
 }

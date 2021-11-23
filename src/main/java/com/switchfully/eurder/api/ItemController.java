@@ -1,9 +1,8 @@
 package com.switchfully.eurder.api;
 
-import com.switchfully.eurder.dto.CreateItemDTO;
-import com.switchfully.eurder.dto.ItemDTO;
-import com.switchfully.eurder.dto.ItemWithStockDTO;
-import com.switchfully.eurder.dto.UpdateItemDTO;
+import com.switchfully.eurder.dto.item.CreateItemDTO;
+import com.switchfully.eurder.dto.item.ItemWithStockDTO;
+import com.switchfully.eurder.dto.item.UpdateItemDTO;
 import com.switchfully.eurder.services.ItemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +27,7 @@ public class ItemController {
     @ResponseStatus(HttpStatus.CREATED)
     public ItemWithStockDTO createItem(@RequestParam(value = "authorisationId") String authorisationId, @RequestBody CreateItemDTO dto) {
         logger.info("Item creation called by user " + authorisationId);
-        return itemService.createNewItem(authorisationId,dto);
+        return itemService.createNewItem(authorisationId, dto);
     }
 
     @GetMapping(produces = "application/json", params = "authorisationId")
@@ -38,7 +37,7 @@ public class ItemController {
         return itemService.getAllItemsByStock(authorisationId);
     }
 
-    @GetMapping(produces = "application/json", params = {"authorisationId","urgency"})
+    @GetMapping(produces = "application/json", params = {"authorisationId", "urgency"})
     @ResponseStatus(HttpStatus.OK)
     public List<ItemWithStockDTO> getItemsByUrgency(@RequestParam(value = "authorisationId") String authorisationId, @RequestParam(value = "urgency", required = false) String urgency) {
         logger.info("Get item filtered by urgency called by user " + authorisationId);
@@ -47,9 +46,9 @@ public class ItemController {
 
     @PutMapping(produces = "application/json", consumes = "application/json", path = "/{itemId}", params = "authorisationId")
     @ResponseStatus(HttpStatus.OK)
-    public ItemWithStockDTO updateItem(@RequestParam(value = "authorisationId") String authorisationId,@PathVariable("itemId") String itemId, @RequestBody UpdateItemDTO dto){
+    public ItemWithStockDTO updateItem(@RequestParam(value = "authorisationId") String authorisationId, @PathVariable("itemId") String itemId, @RequestBody UpdateItemDTO dto) {
         logger.info("Item update called by user " + authorisationId);
-        return itemService.updateItem(authorisationId,itemId,dto);
+        return itemService.updateItem(authorisationId, itemId, dto);
     }
 
 }

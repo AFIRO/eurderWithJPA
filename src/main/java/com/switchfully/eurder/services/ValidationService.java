@@ -1,6 +1,10 @@
 package com.switchfully.eurder.services;
 
-import com.switchfully.eurder.dto.*;
+import com.switchfully.eurder.dto.item.CreateItemDTO;
+import com.switchfully.eurder.dto.item.UpdateItemDTO;
+import com.switchfully.eurder.dto.itemgroup.CreateItemGroupDTO;
+import com.switchfully.eurder.dto.order.CreateOrderDTO;
+import com.switchfully.eurder.dto.user.CreateUserDTO;
 import com.switchfully.eurder.entities.User;
 import com.switchfully.eurder.exceptions.AuthorisationException;
 import com.switchfully.eurder.repository.CustomerRepository;
@@ -18,9 +22,9 @@ public class ValidationService {
     public ValidationService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
-    
 
-    public boolean IsValidCreateUserDTO(createUserDTO dto) {
+
+    public boolean IsValidCreateUserDTO(CreateUserDTO dto) {
         return isValidStringInput(dto.getFirstName())
                 && isValidStringInput(dto.getLastName())
                 && isValidStringInput(dto.getAddress())
@@ -50,8 +54,8 @@ public class ValidationService {
 
     private boolean isValidCreateItemGroupDTOList(List<CreateItemGroupDTO> orderedItems) {
         boolean returnValue = true;
-        
-        for (CreateItemGroupDTO itemGroup: orderedItems) {
+
+        for (CreateItemGroupDTO itemGroup : orderedItems) {
             returnValue = isValidCreateItemGroupDTO(itemGroup);
             if (!returnValue)
                 break;
@@ -65,12 +69,10 @@ public class ValidationService {
     }
 
 
-
     public void assertAdmin(String id) {
         List<String> toValidateAgainst =
                 customerRepository
-                        .getAllUsers()
-                        .values()
+                        .findAll()
                         .stream()
                         .filter(User::isAdmin)
                         .map(User::getUserId)
@@ -102,7 +104,6 @@ public class ValidationService {
             throw new NumberFormatException("The parameter for the price is not valid.");
         }
     }
-
 
 
 }

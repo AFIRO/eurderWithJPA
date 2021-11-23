@@ -7,6 +7,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "item_group")
 public class ItemGroup {
+    private static final Long DAYS_SHIPPING_EXTRA_IF_INSUFFICIENT_STOCK = 7L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "group_id_sequence")
     @SequenceGenerator(name = "group_id_sequence", sequenceName = "group_id_sequence", allocationSize = 1)
@@ -21,7 +22,6 @@ public class ItemGroup {
     private double costForItemGroup;
     @Column(name = "group_shipping_date", columnDefinition = "DATE")
     private LocalDate shippingDate;
-    private static final Long DAYS_SHIPPING_EXTRA_IF_INSUFFICIENT_STOCK = 7L;
 
     public ItemGroup() {
 

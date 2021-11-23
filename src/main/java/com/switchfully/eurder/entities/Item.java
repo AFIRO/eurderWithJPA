@@ -7,50 +7,25 @@ import java.util.Objects;
 @Entity
 @Table(name = "item")
 public class Item {
-    public enum StockUrgencyIndicator {STOCK_LOW,STOCK_MEDIUM,STOCK_HIGH}
-
+    private static final int HIGH_STOCK_THRESHOLD = 10;
+    private static final int MEDIUM_STOCK_THRESHOLD = 5;
     @Id
     @SequenceGenerator(name = "item_id_seq", sequenceName = "item_id_seq", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_id_seq")
-    @Column (name = "item_id", nullable = false)
-    private  String itemId;
-    @Column (name = "item_name")
+    @Column(name = "item_id", nullable = false)
+    private String itemId;
+    @Column(name = "item_name")
     private String name;
-    @Column (name = "item_description")
+    @Column(name = "item_description")
     private String Description;
-    @Column (name = "item_price")
+    @Column(name = "item_price")
     private double price;
-    @Column (name = "item_stock")
+    @Column(name = "item_stock")
     private int amountInStock;
-    @Column (name = "item_urgency")
+    @Column(name = "item_urgency")
     @Enumerated(EnumType.STRING)
     private StockUrgencyIndicator stockUrgencyIndicator;
-
-    private static final int HIGH_STOCK_THRESHOLD = 10;
-    private static final int MEDIUM_STOCK_THRESHOLD = 5;
-
     public Item() {
-    }
-
-    public Item setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public Item setDescription(String description) {
-        Description = description;
-        return this;
-    }
-
-    public Item setPrice(double price) {
-        this.price = price;
-        return this;
-    }
-
-    public Item setAmountInStock(int amountInStock) {
-        this.amountInStock = amountInStock;
-        setStockUrgencyIndicator();
-        return this;
     }
 
     private void setStockUrgencyIndicator() {
@@ -66,16 +41,37 @@ public class Item {
         return name;
     }
 
+    public Item setName(String name) {
+        this.name = name;
+        return this;
+    }
+
     public String getDescription() {
         return Description;
+    }
+
+    public Item setDescription(String description) {
+        Description = description;
+        return this;
     }
 
     public double getPrice() {
         return price;
     }
 
+    public Item setPrice(double price) {
+        this.price = price;
+        return this;
+    }
+
     public int getAmountInStock() {
         return amountInStock;
+    }
+
+    public Item setAmountInStock(int amountInStock) {
+        this.amountInStock = amountInStock;
+        setStockUrgencyIndicator();
+        return this;
     }
 
     public String getItemId() {
@@ -98,4 +94,6 @@ public class Item {
     public int hashCode() {
         return Objects.hash(getItemId());
     }
+
+    public enum StockUrgencyIndicator {STOCK_LOW, STOCK_MEDIUM, STOCK_HIGH}
 }

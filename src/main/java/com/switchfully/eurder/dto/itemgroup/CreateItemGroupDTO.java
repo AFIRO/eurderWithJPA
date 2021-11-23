@@ -1,11 +1,7 @@
-package com.switchfully.eurder.dto;
-
-import com.switchfully.eurder.entities.Item;
-
-import java.time.LocalDate;
+package com.switchfully.eurder.dto.itemgroup;
 
 public class CreateItemGroupDTO {
-    private  String itemId;
+    private String itemId;
     private String amountToOrder;
 
 

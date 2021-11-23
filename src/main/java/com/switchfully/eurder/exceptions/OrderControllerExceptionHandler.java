@@ -15,25 +15,25 @@ public class OrderControllerExceptionHandler extends ResponseEntityExceptionHand
     private final Logger logger = LoggerFactory.getLogger(OrderControllerExceptionHandler.class);
 
     @ExceptionHandler(IllegalArgumentException.class)
-    protected void illegalArgumentException(IllegalArgumentException exception, HttpServletResponse response) throws Exception{
+    protected void illegalArgumentException(IllegalArgumentException exception, HttpServletResponse response) throws Exception {
         logger.error(exception.getMessage());
         response.sendError(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
     }
 
     @ExceptionHandler(AuthorisationException.class)
-    protected void authorisationException(AuthorisationException exception, HttpServletResponse response) throws Exception{
+    protected void authorisationException(AuthorisationException exception, HttpServletResponse response) throws Exception {
         logger.error(exception.getMessage());
         response.sendError(HttpStatus.FORBIDDEN.value(), exception.getMessage());
     }
 
     @ExceptionHandler(NumberFormatException.class)
-    protected void numberFormatException(NumberFormatException exception, HttpServletResponse response) throws Exception{
+    protected void numberFormatException(NumberFormatException exception, HttpServletResponse response) throws Exception {
         logger.error(exception.getMessage());
         response.sendError(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
     }
 
     @ExceptionHandler(NoSuchElementException.class)
-    protected void noSuchElementException(NoSuchElementException exception, HttpServletResponse response) throws Exception{
+    protected void noSuchElementException(NoSuchElementException exception, HttpServletResponse response) throws Exception {
         logger.error(exception.getMessage());
         response.sendError(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
     }

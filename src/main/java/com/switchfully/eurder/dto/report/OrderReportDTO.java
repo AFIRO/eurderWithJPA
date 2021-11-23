@@ -1,16 +1,12 @@
-package com.switchfully.eurder.dto;
+package com.switchfully.eurder.dto.report;
+
+import com.switchfully.eurder.dto.order.OrderDTO;
 
 import java.util.List;
 
 public class OrderReportDTO {
     private List<OrderDTO> orders;
     private double totalCost;
-
-    public OrderReportDTO setOrders(List<OrderDTO> orders) {
-        this.orders = orders;
-        calculateCost();
-        return this;
-    }
 
     private void calculateCost() {
         double calculatedCost = orders.stream()
@@ -21,6 +17,12 @@ public class OrderReportDTO {
 
     public List<OrderDTO> getOrders() {
         return orders;
+    }
+
+    public OrderReportDTO setOrders(List<OrderDTO> orders) {
+        this.orders = orders;
+        calculateCost();
+        return this;
     }
 
     public double getTotalCost() {

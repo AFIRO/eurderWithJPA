@@ -1,9 +1,8 @@
 package com.switchfully.eurder.api;
 
-import com.switchfully.eurder.dto.CreateOrderDTO;
-import com.switchfully.eurder.dto.OrderDTO;
-import com.switchfully.eurder.dto.OrderReportDTO;
-import com.switchfully.eurder.dto.ShippingReportDTO;
+import com.switchfully.eurder.dto.order.CreateOrderDTO;
+import com.switchfully.eurder.dto.order.OrderDTO;
+import com.switchfully.eurder.dto.report.OrderReportDTO;
 import com.switchfully.eurder.services.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,14 +25,14 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     public OrderDTO createOrder(@RequestParam(value = "customerId") String customerId, @RequestBody CreateOrderDTO dto) {
         logger.info("Create order called by user " + customerId);
-        return orderService.createNewOrder(customerId,dto);
+        return orderService.createNewOrder(customerId, dto);
     }
 
-    @PostMapping(produces = "application/json", params = {"customerId","orderId"})
+    @PostMapping(produces = "application/json", params = {"customerId", "orderId"})
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderDTO reorderExistingOrder(@RequestParam(value = "customerId") String customerId,@RequestParam(value = "orderId", required = false)  String orderId) {
+    public OrderDTO reorderExistingOrder(@RequestParam(value = "customerId") String customerId, @RequestParam(value = "orderId", required = false) String orderId) {
         logger.info("Reorder existing order called by user " + customerId);
-        return orderService.reorderExistingOrder(customerId,orderId);
+        return orderService.reorderExistingOrder(customerId, orderId);
     }
 
     @GetMapping(produces = "application/json", params = {"customerId"})
