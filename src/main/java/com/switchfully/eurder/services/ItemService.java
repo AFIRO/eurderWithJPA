@@ -49,7 +49,7 @@ public class ItemService {
         Item updatedItem;
 
 
-        if (validationService.isValidUpdateItemDTO(dto) && itemRepository.countAllByItemId(itemId) == 1) {
+        if (validationService.isValidUpdateItemDTO(dto) && itemRepository.existsByItemId(itemId)) {
             toUpdate = itemRepository.findItemByItemId(itemId);
             updatedItem = itemMapper.updateItem(toUpdate, dto);
             itemRepository.save(updatedItem);

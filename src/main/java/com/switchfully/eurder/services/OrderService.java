@@ -43,7 +43,7 @@ public class OrderService {
     }
 
     public OrderDTO createNewOrder(String customerId, CreateOrderDTO dto) {
-        if (validationService.isValidCreateOrderDTO(dto) && customerRepository.countAllByUserId(customerId) == 1) {
+        if (validationService.isValidCreateOrderDTO(dto) && customerRepository.existsByUserId(customerId)) {
             Order newOrder = orderMapper.toOrder(customerId, dto);
             orderRepository.save(newOrder);
             logger.info("Order with id " + newOrder.getOrderId() + " saved");
@@ -69,7 +69,7 @@ public class OrderService {
     public OrderReportDTO getReportOfCustomerOrders(String customerId) {
         List<OrderDTO> reportedOrders;
 
-        if (customerRepository.countAllByUserId(customerId) == 1) {
+        if (customerRepository.existsByUserId(customerId)) {
             reportedOrders = orderRepository.findAllByCustomer(customerRepository.findByUserId(customerId))
                     .stream()
                     .map(orderMapper::toOrderDTO)

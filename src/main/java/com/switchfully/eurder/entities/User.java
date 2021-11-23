@@ -25,6 +25,7 @@ public class User {
     @Column(name = "user_role")
     @Enumerated(EnumType.STRING)
     private Role role;
+
     public User() {
 
     }
@@ -104,4 +105,6 @@ public class User {
     }
 
     public enum Role {CUSTOMER, ADMIN}
+
+
 }
